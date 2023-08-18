@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>  
+</style>
+<body>
+    <form action="" id="submit">
+        <div>
+            <label for="fname">Name</label>
+            <input type="text" name="fname" id="fname" >
+            <p id="first" style="color: red;"></p>
+        </div>
+        <div>
+            <label for="flname">Last Name</label>
+            <input type="text" name="lname" id="lname" >
+            <p id="last" style="color: red;"></p>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" >
+        </div>
+        <div>
+            <label for="gender">Gender:</label>
+            <select name="gender">
+            <option value="">Please select one…</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="other">Other</option>
+            </select>
+        </div>
+        <div>
+            <label for="date">Date of Birth</label>
+            <input type="date" name="date" id="date" >
+            <p id="DOB" style="color: red;"></p>
+        </div>
+        
+        <div>
+            <label for="phone">Phone number</label>
+            <input type="text" name="phone" id="phone">
+            <div id="Error" style="color: red;"></div>
+        </div>
+        <div>
+            <label for="passord">Password</label>
+            <input type="password" name="password" id="password" >
+            <p id="errorPassword" style="color: red;"></p>
+        </div>
+      <div><button type="submit">Submit</button></div>
+        
+        
+    </form> 
+    <script>
+           //validation check for phone number
+        const submit = document.getElementById("submit");
+        const phone= document.getElementById("phone");
+        const phoneError = document.getElementById("Error");
+        submit.addEventListener("submit", function(a) 
+        {
+            if (!validatePhoneNumber(phone.value)) {
+                phoneError.textContent = 'Envalid phone number';
+                a.preventDefault();   
+            }else{
+                phoneError.textContent = '';
+            }
+            
+        });
+        function validatePhoneNumber(phone) {
+             const phonePattern = /^\d{10}$/; 
+             return phonePattern.test(phone);
+            }      
+
+        //first name validation
+        const firstName = document.getElementById("fname");
+        const firstNameError = document.getElementById("first")
+        firstName.addEventListener("change",function(){
+            if(!validateName(firstName.value)){
+                firstNameError.textContent = "First letter should be capital"
+            }else {
+        firstNameError.textContent = "";
+         }
+        })
+        function validateName(name){
+            return name.charAt(0) === name.charAt(0).toUpperCase()
+        }
+         
+        //lastname validation
+        const lastName = document.getElementById("lname");
+        const lastNameError = document.getElementById("last");
+        lastName.addEventListener("change",()=>{
+            if(!validLastName(lastName.value)){
+                lastNameError.textContent = "First letter should be capital"
+            }else{
+                lastNameError.textContent = "";
+            }
+        })
+
+        function validLastName(name){
+            return name.charAt(0) === name.charAt(0).toUpperCase()
+        }
+        
+   //date validation
+        const date = document.getElementById("date");
+        const dateAlert = document.getElementById("DOB");
+        const dateToday = new Date();
+        date.addEventListener("change", ()=>{
+            if(checkDate(date.value)){
+              
+                dateAlert.textContent = "please provide valid DOB"
+            }else{
+                dateAlert.textContent = ""
+            }
+        })
+
+        function checkDate(input){
+           const birth = new Date(input);
+           return birth>=dateToday;
+        }
+
+        //password validation
+        const pass = document.getElementById("password");
+        const passError = document.getElementById("errorPassword");
+        pass.addEventListener("change", ()=>{
+            if(!passCheck(pass.value)){
+                passError.innerText = "Minimum eight characters, at least one letter and one number"
+            }else{
+                passError.textContent = "";
+            }
+        });
+
+        function passCheck(value){
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+            return passwordPattern.test(value)
+        }
+
+    </script>
+</body>
+</html>
