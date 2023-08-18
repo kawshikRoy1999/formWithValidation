@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab&display=swap" rel="stylesheet">
 </head>  
 </style>
 <body>
@@ -22,6 +25,7 @@
         <div>
             <label for="email">Email</label>
             <input type="email" name="email" id="email" >
+            
         </div>
         <div>
             <label for="gender">Gender:</label>
@@ -35,7 +39,7 @@
         <div>
             <label for="date">Date of Birth</label>
             <input type="date" name="date" id="date" >
-            <p id="DOB" style="color: red;"></p>
+            <p id="DOB" style="color: red"></p>
         </div>
         
         <div>
@@ -53,11 +57,15 @@
         
     </form> 
     <script>
+           
            //submit validation if all condition OK then submit
            const submit = document.getElementById("submit");
            submit.addEventListener("submit",function(a){
             if(!validatePhoneNumber(phone.value) || !validateName(firstName.value ) || !validLastName(lastName.value) ||checkDate(date.value) && !passCheck(pass.value)){
                 a.preventDefault();
+                alert("please provide valid information");
+            }else{
+                alert("Code submitted successfull");
             }
            })
 
