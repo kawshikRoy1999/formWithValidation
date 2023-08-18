@@ -53,15 +53,23 @@
         
     </form> 
     <script>
+           //submit validation if all condition OK then submit
+           const submit = document.getElementById("submit");
+           submit.addEventListener("submit",function(a){
+            if(!validatePhoneNumber(phone.value) || !validateName(firstName.value ) || !validLastName(lastName.value) ||checkDate(date.value) && !passCheck(pass.value)){
+                a.preventDefault();
+            }
+           })
+
            //validation check for phone number
-        const submit = document.getElementById("submit");
+       
         const phone= document.getElementById("phone");
         const phoneError = document.getElementById("Error");
-        submit.addEventListener("submit", function(a) 
+        phone.addEventListener("change", function() 
         {
             if (!validatePhoneNumber(phone.value)) {
                 phoneError.textContent = 'Envalid phone number';
-                a.preventDefault();   
+                  
             }else{
                 phoneError.textContent = '';
             }
@@ -101,12 +109,12 @@
             return name.charAt(0) === name.charAt(0).toUpperCase()
         }
         
-   //date validation
+       //date validation
         const date = document.getElementById("date");
         const dateAlert = document.getElementById("DOB");
         const dateToday = new Date();
         date.addEventListener("change", ()=>{
-            if(checkDate(date.value)){
+            if(!checkDate(date.value)){
               
                 dateAlert.textContent = "please provide valid DOB"
             }else{
@@ -116,7 +124,7 @@
 
         function checkDate(input){
            const birth = new Date(input);
-           return birth>=dateToday;
+           return birth<=dateToday;
         }
 
         //password validation
